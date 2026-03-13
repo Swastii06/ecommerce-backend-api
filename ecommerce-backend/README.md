@@ -82,17 +82,18 @@ erDiagram
 | `POST` | `/api/orders/checkout` | Process payment and place order | Secured (JWT) |
 
 ## API Screenshots
+
 **Screenshot 1: User Registration**
-![User Registration](<img width="1770" height="663" alt="Image" src="https://github.com/user-attachments/assets/61aae984-ef85-4a39-a178-47f7a77031ee" />)
+![User Registration](https://github.com/user-attachments/assets/61aae984-ef85-4a39-a178-47f7a77031ee)
 
 **Screenshot 2: JWT Token Generation (Login)**
-![Login](<img width="1758" height="638" alt="Image" src="https://github.com/user-attachments/assets/0754b4f0-1aea-4e18-8e2d-bb65e214d059" />)
+![Login](https://github.com/user-attachments/assets/0754b4f0-1aea-4e18-8e2d-bb65e214d059)
 
 **Screenshot 3: Adding a Product**
-![Add Product](<img width="917" height="725" alt="Image" src="https://github.com/user-attachments/assets/1cc8d55a-1214-465d-88a8-2d517862a765" />)
+![Add Product](https://github.com/user-attachments/assets/1cc8d55a-1214-465d-88a8-2d517862a765)
 
 **Screenshot 4: Adding to Cart (200 OK)**
-![Add to Cart](<img width="1737" height="918" alt="Image" src="https://github.com/user-attachments/assets/888eb6ac-9366-4d8b-9835-f9194e5350f1" />)
+![Add to Cart](https://github.com/user-attachments/assets/888eb6ac-9366-4d8b-9835-f9194e5350f1)
 
 **Screenshot 5: Order Checkout (200 OK)**
-![Checkout](<img width="1754" height="800" alt="Image" src="https://github.com/user-attachments/assets/898cef3e-015f-4f25-a277-9a93ad788506" />)
+![Checkout](https://github.com/user-attachments/assets/898cef3e-015f-4f25-a277-9a93ad788506)
