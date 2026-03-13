@@ -83,7 +83,3 @@ erDiagram
 
 ## API Screenshots
 
-* 
-* **Screenshot 2:** JWT Token Generation (Login)
-* **Screenshot 3:** Adding a Product
-* **Screenshot 4:** Order Checkout (200 OK)
