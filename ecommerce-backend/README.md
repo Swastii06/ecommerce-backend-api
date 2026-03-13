@@ -82,4 +82,17 @@ erDiagram
 | `POST` | `/api/orders/checkout` | Process payment and place order | Secured (JWT) |
 
 ## API Screenshots
+**Screenshot 1: User Registration**
+![User Registration](Register.png)
 
+**Screenshot 2: JWT Token Generation (Login)**
+![Login](Login.png)
+
+**Screenshot 3: Adding a Product**
+![Add Product](Add-Product.png)
+
+**Screenshot 4: Adding to Cart (200 OK)**
+![Add to Cart](Add-to-Cart.png)
+
+**Screenshot 5: Order Checkout (200 OK)**
+![Checkout](Checkout.png)
