@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  mysqldb:
+    image: mysql:8.0
+    container_name: ecommerce_db
+    environment:
+      MYSQL_DATABASE: ecommerce_db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+
+  app:
+    build: .
+    container_name: ecommerce_backend_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysqldb
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/ecommerce_db?allowPublicKeyRetrieval=true&useSSL=false
