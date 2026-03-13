@@ -55,6 +55,7 @@ erDiagram
         String orderStatus
         Long user_id FK
     }
+```
 ## API Endpoints & Methods
 
 | Method | Endpoint | Description | Security |
