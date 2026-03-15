@@ -1,0 +1,681 @@
+{
+  "info": {
+    "_postman_id": "90059eb5-2f5a-4d62-927d-ef990ed4912e",
+    "name": "E-Commerce Backend APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52627901",
+    "_collection_link": "https://go.postman.co/collection/52627901-90059eb5-2f5a-4d62-927d-ef990ed4912e?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "1. Register User",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Swastideepa Dash\",\r\n    \"email\": \"swasti@gmail.com\",\r\n    \"password\": \"12345\",\r\n    \"role\": \"ADMIN\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/users/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "users",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "2. Login User",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"swasti@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/users/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "users",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "3. Add Product",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXNoc3dhc3RpZGVlcGFAZ21haWwuY29tIiwiaWF0IjoxNzczMDMyMTIyLCJleHAiOjE3NzMwMzU3MjJ9.ZIx5ZQiG3pIspAtWKieBIyXIfLzJfJAPJST7V4Yyxvc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Gaming Laptop\",\r\n    \"description\": \"High performance laptop\",\r\n    \"price\": 1200.00,\r\n    \"stock\": 10,\r\n    \"category\": \"Electronics\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/products",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "4(a). Add to Cart",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXNoc3dhc3RpZGVlcGFAZ21haWwuY29tIiwiaWF0IjoxNzczMzEzMjAyLCJleHAiOjE3NzMzMTY4MDJ9.XVMJKDPtzLKFYfPj8a0DOwpzaF1LFuHUEniNFUAgigk",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/cart/add/1?quantity=1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "cart",
+            "add",
+            "1"
+          ],
+          "query": [
+            {
+              "key": "quantity",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "4(b). Add to Cart",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXNoc3dhc3RpZGVlcGFAZ21haWwuY29tIiwiaWF0IjoxNzczMzEzMjAyLCJleHAiOjE3NzMzMTY4MDJ9.XVMJKDPtzLKFYfPj8a0DOwpzaF1LFuHUEniNFUAgigk",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/cart/add/50?quantity=1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "cart",
+            "add",
+            "50"
+          ],
+          "query": [
+            {
+              "key": "quantity",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "5. Checkout",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXNoc3dhc3RpZGVlcGFAZ21haWwuY29tIiwiaWF0IjoxNzczMzEzMjAyLCJleHAiOjE3NzMzMTY4MDJ9.XVMJKDPtzLKFYfPj8a0DOwpzaF1LFuHUEniNFUAgigk",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/orders/checkout",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "orders",
+            "checkout"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "6. Get User by ID (Admin)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZWplc2hrdW1hcmdhbnR5YWRhQGdtYWlsLmNvbSIsImlhdCI6MTc3MzU1NzQ5OCwiZXhwIjoxNzczNTYxMDk4fQ.LTYec8TVR9YPgm2xRRMQqn2_lkEu-1iJjj_uVSvVhpQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/users/8",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "users",
+            "8"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "7. Get All Products ",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/products",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "8. Get Product by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/products/6",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "products",
+            "6"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "9. Update Product (Admin)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZWplc2hrdW1hcmdhbnR5YWRhQGdtYWlsLmNvbSIsImlhdCI6MTc3MzU2MzIzNCwiZXhwIjoxNzczNTY2ODM0fQ.uEh2OwLpMGaRqkrht0YzRHA8M_w1A6LgPm0o5LpZqCo",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Motorola Edge 70 fusion\",\r\n    \"description\": \"Storage: 256+12\",\r\n    \"price\": 35000.00,\r\n    \"stock\": 15,\r\n    \"category\": \"Electronics\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/products/6",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "products",
+            "6"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "10. Delete Product (Admin)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZWplc2hrdW1hcmdhbnR5YWRhQGdtYWlsLmNvbSIsImlhdCI6MTc3MzU2MzIzNCwiZXhwIjoxNzczNTY2ODM0fQ.uEh2OwLpMGaRqkrht0YzRHA8M_w1A6LgPm0o5LpZqCo",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/products/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "products",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "11. View Cart (Customer)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXNoc2F5YW50YW5pQGdtYWlsLmNvbSIsImlhdCI6MTc3MzU2MzgwNywiZXhwIjoxNzczNTY3NDA3fQ.uVZXoqQvbG4xoG9tWb8PxP4S_icB6-eoJBl1tAGxwz0",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/cart",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "cart"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "12. Update Cart Quantity (Customer)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXNoc2F5YW50YW5pQGdtYWlsLmNvbSIsImlhdCI6MTc3MzU2MzgwNywiZXhwIjoxNzczNTY3NDA3fQ.uVZXoqQvbG4xoG9tWb8PxP4S_icB6-eoJBl1tAGxwz0",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/cart/update/1?quantity=5",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "cart",
+            "update",
+            "1"
+          ],
+          "query": [
+            {
+              "key": "quantity",
+              "value": "5"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "13. Remove Item From Cart (Customer)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXNoc2F5YW50YW5pQGdtYWlsLmNvbSIsImlhdCI6MTc3MzU2MzgwNywiZXhwIjoxNzczNTY3NDA3fQ.uVZXoqQvbG4xoG9tWb8PxP4S_icB6-eoJBl1tAGxwz0",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/cart/remove/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "cart",
+            "remove",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "14. Update User (Admin)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZWplc2hrdW1hcmdhbnR5YWRhQGdtYWlsLmNvbSIsImlhdCI6MTc3MzU2ODE3OCwiZXhwIjoxNzczNTcxNzc4fQ.FMclpRGVrWrAk_KlJLDeC7xCzITbqt-OvScioFcYS18",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Sayantani Dash (Updated)\",\r\n    \"email\": \"dashsayantani@gmail.com\",\r\n    \"role\": \"CUSTOMER\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/users/7",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "users",
+            "7"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "15. Delete User (Admin)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZWplc2hrdW1hcmdhbnR5YWRhQGdtYWlsLmNvbSIsImlhdCI6MTc3MzU2ODE3OCwiZXhwIjoxNzczNTcxNzc4fQ.FMclpRGVrWrAk_KlJLDeC7xCzITbqt-OvScioFcYS18",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/users/9",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "users",
+            "9"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "16. View Order History (Customer)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXNoc2F5YW50YW5pQGdtYWlsLmNvbSIsImlhdCI6MTc3MzU2ODU1MywiZXhwIjoxNzczNTcyMTUzfQ.58LzOWwPnaqimJT8noYNK6MDXMsDM1MOo79FJXs9h3o",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/orders",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "orders"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "17. View Order by ID (Customer)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXNoc2F5YW50YW5pQGdtYWlsLmNvbSIsImlhdCI6MTc3MzU2ODU1MywiZXhwIjoxNzczNTcyMTUzfQ.58LzOWwPnaqimJT8noYNK6MDXMsDM1MOo79FJXs9h3o",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/orders/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "orders",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "18. Update Order Status (Admin)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZWplc2hrdW1hcmdhbnR5YWRhQGdtYWlsLmNvbSIsImlhdCI6MTc3MzU2ODgwMCwiZXhwIjoxNzczNTcyNDAwfQ.Q6mfadUBz-rCrBApitLKAtMlMZjvCzNJ6JystroJ5YY",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/orders/1/status?status=SHIPPED",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "orders",
+            "1",
+            "status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "SHIPPED"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

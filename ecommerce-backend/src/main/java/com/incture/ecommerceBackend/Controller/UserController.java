@@ -22,11 +22,14 @@ import com.incture.ecommerceBackend.Service.UserService;
 @RequestMapping("/api/users")
 public class UserController {
 
-	@Autowired
-	private UserService userService;
+	private final UserService userService;
+	private final PasswordEncoder passwordEncoder;
 
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	public UserController(UserService userService, PasswordEncoder passwordEncoder) {
+		this.userService = userService;
+		this.passwordEncoder = passwordEncoder;
+	}
 
 	@PostMapping("/register")
 	public ResponseEntity<String> register(@RequestBody User user) {
@@ -42,34 +45,33 @@ public class UserController {
 		return ResponseEntity.ok("User registered successfully");
 	}
 
-	// --- NEW ENDPOINTS FOR FINAL SUBMISSION ---
-
-	// 1. Profile Update (Logged-in user)
+	// Profile Update (Logged-in user)
 	@PutMapping("/profile")
 	public ResponseEntity<User> updateProfile(@RequestBody User user, Principal principal) {
 		return ResponseEntity.ok(userService.updateProfile(principal.getName(), user));
+		// Uses the logged-in user's email to update their profile
 	}
 
-	// 2. Change Password (Logged-in user)
+	// Change Password (Logged-in user)
 	@PutMapping("/change-password")
 	public ResponseEntity<String> changePassword(@RequestParam String newPassword, Principal principal) {
 		userService.changePassword(principal.getName(), newPassword, passwordEncoder);
 		return ResponseEntity.ok("Password changed successfully!");
 	}
 
-	// 3. Admin: Get User by ID
+	// Admin gets user by id
 	@GetMapping("/{id}")
 	public ResponseEntity<User> getUserById(@PathVariable Long id) {
 		return ResponseEntity.ok(userService.getUserById(id));
 	}
 
-	// 4. Admin: Update User
+	// Admin updates user
 	@PutMapping("/{id}")
 	public ResponseEntity<User> updateUserByAdmin(@PathVariable Long id, @RequestBody User user) {
 		return ResponseEntity.ok(userService.updateUserByAdmin(id, user));
 	}
 
-	// 5. Admin: Delete User
+	// Admin deletes User
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteUser(@PathVariable Long id) {
 		userService.deleteUser(id);

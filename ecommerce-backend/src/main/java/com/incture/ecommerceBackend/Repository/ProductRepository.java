@@ -12,9 +12,9 @@ import com.incture.ecommerceBackend.Entity.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-	// Finding products by category and supports pages
+	// Find products by category and supports pages
 	Page<Product> findByCategory(String category, Pageable pageable);
 
-	// Finding products under a certain price and supports pages
+	// Find products under a certain price and supports pages
 	Page<Product> findByPriceLessThanEqual(BigDecimal price, Pageable pageable);
 }

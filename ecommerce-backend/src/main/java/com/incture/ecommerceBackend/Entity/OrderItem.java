@@ -2,6 +2,8 @@ package com.incture.ecommerceBackend.Entity;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,11 +20,12 @@ public class OrderItem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "order_id")
 	private Order order;
 
-	@ManyToOne
+	@ManyToOne // Many people can put the exact same product into their individual carts
 	@JoinColumn(name = "product_id")
 	private Product product;
 

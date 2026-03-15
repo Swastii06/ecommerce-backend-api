@@ -22,14 +22,17 @@ import com.incture.ecommerceBackend.Repository.ProductRepository;
 class ProductServiceTest {
 
 	@Mock
-	private ProductRepository productRepository; // The "fake" DB
+	private ProductRepository productRepository; // The "fake" db that simulates db behaivior without using real db
 
 	@InjectMocks
-	private ProductService productService; // The real service we are testing
+	private ProductService productService; // The real service we are testing is injected with mock ProductRepository
+											// into it
 
 	private Product testProduct;
+	// A sample product object used for testing.
 
-	@BeforeEach
+	@BeforeEach // This method runs before every test case & is used to initialize test data.
+
 	void setUp() {
 		System.out.println("Executing @BeforeEach: Setting up fake product data...");
 		testProduct = new Product();
@@ -39,8 +42,9 @@ class ProductServiceTest {
 		testProduct.setStock(10);
 	}
 
-	@DisplayName("Test Adding a Product")
-	@Test
+	@DisplayName("Test Adding a Product") // Provides a readable name for the test case
+
+	@Test // Marks this method as a test method to be executed by JUnit
 	void testAddProduct() {
 		System.out.println("Running Test: Add Product");
 

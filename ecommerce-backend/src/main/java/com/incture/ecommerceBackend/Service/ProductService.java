@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.incture.ecommerceBackend.Entity.Product;
@@ -28,7 +29,7 @@ public class ProductService {
 		return productRepository.save(product);
 	}
 
-	// 2. View products with Pagination and Filtering (Added category and maxPrice)
+	// 2. View products with Pagination and Filtering
 	public Page<Product> getAllProducts(int page, int size, String sortBy, String category, BigDecimal maxPrice) {
 		Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
 
@@ -45,10 +46,10 @@ public class ProductService {
 		return productRepository.findAll(pageable);
 	}
 
-	// 3. Get a single product by ID (Updated to CustomException)
+	// 3. Get a single product by ID
 	public Product getProductById(Long id) {
 		return productRepository.findById(id)
-				.orElseThrow(() -> new CustomException("Product not found with ID: " + id));
+				.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "Product not found with ID: " + id));
 	}
 
 	// 4. Update an existing product

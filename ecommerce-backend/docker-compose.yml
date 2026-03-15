@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  mysqldb:
+  mysqldb:       #you dont need to install MySQL on your computer, creates a container named ecommerce_db, and automatically sets the root password to root
     image: mysql:8.0
     container_name: ecommerce_db
     environment:

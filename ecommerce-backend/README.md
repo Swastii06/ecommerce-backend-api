@@ -2,10 +2,10 @@
 
 **Created and designed by:** Swastideepa Dash
 
-## 📖 Project Overview
+## Project Overview
 This is a robust, production-ready E-commerce REST API built with Spring Boot. It features secure user authentication, product management, a functional shopping cart, simulated order checkout, and automated email notifications.
 
-## 💻 Technologies Used
+## Technologies Used
 * **Java 17** & **Spring Boot 3**
 * **Spring Security** & **JWT (JSON Web Tokens)** for authentication
 * **Spring Data JPA** & **Hibernate** for database interactions
@@ -17,7 +17,7 @@ This is a robust, production-ready E-commerce REST API built with Spring Boot. I
 
 
 
-## 📊 Entity Relationship (ER) Diagram
+## Entity Relationship (ER) Diagram
 *The database architecture representing how entities are related.*
 
 ```mermaid
@@ -55,3 +55,4 @@ erDiagram
         String orderStatus
         Long user_id FK
     }
+    ```

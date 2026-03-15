@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.incture.ecommerceBackend.Entity.Cart;
@@ -38,7 +39,7 @@ public class OrderService {
 		Cart cart = cartService.getCartByUserEmail(email);
 
 		if (cart.getCartItems().isEmpty()) {
-			throw new CustomException("Cart is empty!");
+			throw new CustomException(HttpStatus.BAD_REQUEST, "Cart is empty!");
 		}
 
 		// Initialize Order
@@ -50,8 +51,11 @@ public class OrderService {
 
 		// Convert CartItems to OrderItems
 		for (CartItem cartItem : cart.getCartItems()) {
-			if (cartItem.getProduct().getStock() < cartItem.getQuantity()) {
-				throw new CustomException("Product " + cartItem.getProduct().getName() + " is out of stock!");
+			if (cartItem.getProduct().getStock() < cartItem.getQuantity()) { // Making sure that nobody can buy more
+																				// quantity than that left in the
+																				// database
+				throw new CustomException(HttpStatus.CONFLICT,
+						"Product " + cartItem.getProduct().getName() + " is out of stock!");
 			}
 
 			OrderItem orderItem = new OrderItem();
@@ -62,14 +66,15 @@ public class OrderService {
 			order.getOrderItems().add(orderItem);
 		}
 
-		// Simulating Payment here- 80% chance of Success, 20% chance of Failure
+		// Simulating Payment here- Math.random() gives a number between 0.0 and 1.0 and
+		// if the number is greater than 0.2, the payment succeeds.
 		boolean paymentSuccess = Math.random() > 0.2;
 
 		if (paymentSuccess) {
 			order.setPaymentStatus("SUCCESS");
 			order.setOrderStatus("PLACED");
 
-			// Reduce stock after successful order
+			// Reducing stock after successful order
 			for (OrderItem item : order.getOrderItems()) {
 				Product product = item.getProduct();
 				product.setStock(product.getStock() - item.getQuantity());
@@ -86,10 +91,10 @@ public class OrderService {
 			order.setOrderStatus("CANCELLED");
 		}
 
-		return orderRepository.save(order);
+		return orderRepository.save(order); // order stored in DB
 	}
 
-	public List<Order> getUserOrders(String email) {
+	public List<Order> getUserOrders(String email) { // Find orders of the user
 		Cart cart = cartService.getCartByUserEmail(email);
 		return orderRepository.findByUser(cart.getUser());
 	}
@@ -98,7 +103,7 @@ public class OrderService {
 		return orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
 	}
 
-	public Order updateOrderStatus(Long orderId, String newStatus) {
+	public Order updateOrderStatus(Long orderId, String newStatus) { // Fetch order, Update status, Save
 		Order order = getOrderById(orderId);
 		order.setOrderStatus(newStatus);
 		return orderRepository.save(order);

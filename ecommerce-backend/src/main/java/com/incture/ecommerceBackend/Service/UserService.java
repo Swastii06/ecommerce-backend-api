@@ -1,6 +1,7 @@
 package com.incture.ecommerceBackend.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -28,24 +29,23 @@ public class UserService implements UserDetailsService {
 				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with email: " + email));
 	}
 
-	// --- NEW METHODS FOR FINAL SUBMISSION ---
-
 	// Helper method to get user by Email
 	public User getUserByEmail(String email) {
 		return userRepository.findByEmail(email)
-				.orElseThrow(() -> new CustomException("User not found with email: " + email));
+				.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "User not found with email: " + email));
 	}
 
 	// Get User by ID (Admin)
 	public User getUserById(Long id) {
-		return userRepository.findById(id).orElseThrow(() -> new CustomException("User not found with ID: " + id));
+		return userRepository.findById(id)
+				.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "Product not found with ID: " + id));
 	}
 
 	// Profile Update (Customer)
 	public User updateProfile(String email, User updatedUser) {
 		User existingUser = getUserByEmail(email);
 		existingUser.setName(updatedUser.getName());
-		// Intentionally NOT updating email, password, or role here for security!
+		// NOT updating email, password, or role here for security
 		return userRepository.save(existingUser);
 	}
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.incture.ecommerceBackend.Entity.Cart;
@@ -33,7 +34,8 @@ public class CartService {
 
 	// Fetch the cart of the currently logged-in user
 	public Cart getCartByUserEmail(String email) {
-		User user = userRepository.findByEmail(email).orElseThrow(() -> new CustomException("User not found"));
+		User user = userRepository.findByEmail(email)
+				.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "User not found"));
 
 		return cartRepository.findByUser(user).orElseGet(() -> {
 			Cart newCart = new Cart();
@@ -48,11 +50,12 @@ public class CartService {
 	public Cart addProductToCart(String email, Long productId, int quantity) {
 		Cart cart = getCartByUserEmail(email);
 		Product product = productRepository.findById(productId)
-				.orElseThrow(() -> new CustomException("Product not found"));
+				.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "Product not found"));
 
 		// Condition is: Prevent ordering if stock is less than requested quantity
 		if (product.getStock() < quantity) {
-			throw new CustomException("Not enough stock available! Only " + product.getStock() + " left.");
+			throw new CustomException(HttpStatus.CONFLICT,
+					"Not enough stock available! Only " + product.getStock() + " left.");
 		}
 
 		// Check if item is already in the cart
@@ -77,10 +80,10 @@ public class CartService {
 	public Cart updateCartQuantity(String email, Long productId, int newQuantity) {
 		Cart cart = getCartByUserEmail(email);
 		CartItem item = cart.getCartItems().stream().filter(ci -> ci.getProduct().getId().equals(productId)).findFirst()
-				.orElseThrow(() -> new CustomException("Item not found in cart"));
+				.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "Item not found in cart"));
 
 		if (item.getProduct().getStock() < newQuantity) {
-			throw new CustomException("Not enough stock available!");
+			throw new CustomException(HttpStatus.CONFLICT, "Not enough stock available!");
 		}
 
 		item.setQuantity(newQuantity);

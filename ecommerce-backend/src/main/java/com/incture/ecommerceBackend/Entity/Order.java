@@ -23,7 +23,7 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne
+	@ManyToOne // A single user can have muultiple orders
 	@JoinColumn(name = "user_id")
 	private User user;
 

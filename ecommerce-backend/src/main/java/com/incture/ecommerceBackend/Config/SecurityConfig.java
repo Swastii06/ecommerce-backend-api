@@ -42,20 +42,43 @@ public class SecurityConfig {
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+		// Creates a bean for BCrypt password encryption and is used for storing
+		// passwords & verifying passwords during login.
 	}
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authenticationManager)
-			throws Exception {
+			throws Exception { // This method configures how HTTP requests are secured
 
 		JwtAuthenticationFilter jwtAuthFilter = new JwtAuthenticationFilter(authenticationManager, jwtUtil,
 				userDetailsService);
+		// Creates a custom filter that extracts JWT token, validates token &
+		// authenticates user
 
 		http.csrf(csrf -> csrf.disable()).authorizeHttpRequests(auth -> auth
 
+				// PUBLIC ENDPOINTS (No token required)
 				.requestMatchers("/api/users/register", "/api/users/login", "/error", "/v3/api-docs/**",
 						"/swagger-ui/**", "/swagger-ui.html")
-				.permitAll().anyRequest().authenticated())
+				.permitAll()
+				// Allow anyone to view products
+				.requestMatchers(org.springframework.http.HttpMethod.GET, "/api/products", "/api/products/**")
+				.permitAll()
+
+				// ADMIN-ONLY ENDPOINTS (Requires "ADMIN" authority)
+				.requestMatchers(org.springframework.http.HttpMethod.GET, "/api/users/**").hasAuthority("ADMIN")
+				.requestMatchers(org.springframework.http.HttpMethod.PUT, "/api/users/{id}").hasAuthority("ADMIN")
+				.requestMatchers(org.springframework.http.HttpMethod.DELETE, "/api/users/**").hasAuthority("ADMIN")
+
+				.requestMatchers(org.springframework.http.HttpMethod.POST, "/api/products").hasAuthority("ADMIN")
+				.requestMatchers(org.springframework.http.HttpMethod.PUT, "/api/products/**").hasAuthority("ADMIN")
+				.requestMatchers(org.springframework.http.HttpMethod.DELETE, "/api/products/**").hasAuthority("ADMIN")
+
+				.requestMatchers(org.springframework.http.HttpMethod.PUT, "/api/orders/*/status").hasAuthority("ADMIN")
+
+				// SECURED CUSTOMER ENDPOINTS (Cart, Checkout, Profile)
+				.anyRequest().authenticated())
+
 				.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
 		return http.build();
@@ -64,5 +87,6 @@ public class SecurityConfig {
 	@Bean
 	public AuthenticationManager authenticationManager() {
 		return new ProviderManager(Arrays.asList(daoAuthenticationProvider()));
+		// registers the DaoAuthenticationProvider as the authentication provider
 	}
 }

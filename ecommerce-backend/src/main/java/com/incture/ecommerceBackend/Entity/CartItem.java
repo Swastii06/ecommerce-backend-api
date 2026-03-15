@@ -18,12 +18,13 @@ public class CartItem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne
+	@ManyToOne // One cart can has many CartItems
 	@JoinColumn(name = "cart_id")
 	@JsonIgnore
 	private Cart cart;
 
-	@ManyToOne
+	@ManyToOne // Many people can put the exact same product into their individual carts
+				// or orders
 	@JoinColumn(name = "product_id")
 	private Product product;
 

@@ -32,30 +32,41 @@ public class ProductController {
 	@PostMapping
 	public ResponseEntity<Product> addProduct(@RequestBody Product product) {
 		return ResponseEntity.ok(productService.addProduct(product));
+		// Receives product data from request body,
+		// sends it to ProductService to save in the database,
+		// then returns the saved product.
 	}
 
-	// Updated to accept optional category and maxPrice parameters
 	@GetMapping
 	public ResponseEntity<Page<Product>> getAllProducts(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy,
 			@RequestParam(required = false) String category, @RequestParam(required = false) BigDecimal maxPrice) {
+		// default page number = 0
+		// default number of products per page = 10
+		// default sorting of products is by id
+		// Optional filters: only show products of a certain category, show products
+		// cheaper than this price
 
 		return ResponseEntity.ok(productService.getAllProducts(page, size, sortBy, category, maxPrice));
+		// Calls ProductService to fetch products using pagination and filters.
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Product> getProductById(@PathVariable Long id) {
 		return ResponseEntity.ok(productService.getProductById(id));
+		// Retrieves a specific product from the database using its id
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
 		return ResponseEntity.ok(productService.updateProduct(id, product));
+		// Updates the product details (price, name, category, etc.)
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
 		productService.deleteProduct(id);
 		return ResponseEntity.ok("Product deleted successfully");
+		// Calls service to delete the product from db
 	}
 }

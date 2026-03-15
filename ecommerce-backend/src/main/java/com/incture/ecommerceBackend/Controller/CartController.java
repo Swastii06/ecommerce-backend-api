@@ -32,22 +32,35 @@ public class CartController {
 	public ResponseEntity<Cart> getCart(Principal principal) {
 
 		return ResponseEntity.ok(cartService.getCartByUserEmail(principal.getName()));
+		// principal.getName() gives the logged-in user's email
+		// cartService fetches the cart of that user
+		// ResponseEntity.ok() returns HTTP status 200 with cart data.
 	}
 
+	// Adds a product to cart
 	@PostMapping("/add/{productId}")
 	public ResponseEntity<Cart> addToCart(@PathVariable Long productId, @RequestParam(defaultValue = "1") int quantity,
-			Principal principal) {
+			Principal principal) { // Extracts quantity from request parameters and if quantity is not provided,
+									// default value = 1.
 		return ResponseEntity.ok(cartService.addProductToCart(principal.getName(), productId, quantity));
+		// Calls service method to add product to the user's cart.
+		// Returns updated cart as response.
 	}
 
+	// Updates quantity of a product in cart
 	@PutMapping("/update/{productId}")
 	public ResponseEntity<Cart> updateQuantity(@PathVariable Long productId, @RequestParam int quantity,
 			Principal principal) {
 		return ResponseEntity.ok(cartService.updateCartQuantity(principal.getName(), productId, quantity));
+		// Calls service method to update product quantity.
+		// Returns updated cart.
 	}
 
+	// Removes a product from cart
 	@DeleteMapping("/remove/{productId}")
 	public ResponseEntity<Cart> removeFromCart(@PathVariable Long productId, Principal principal) {
 		return ResponseEntity.ok(cartService.removeProductFromCart(principal.getName(), productId));
+		// Calls service method to remove the product from user's cart
+		// Returns updated cart
 	}
 }

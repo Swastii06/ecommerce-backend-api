@@ -24,15 +24,18 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToOne
+	@OneToOne // One user gets one cart
 	@JoinColumn(name = "user_id")
-	@JsonIgnore
+	@JsonIgnore // It tells Postman to stop reading and just print the data it has.
 	private User user;
 
 	@Column(name = "total_price")
 	private BigDecimal totalPrice;
 
-	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL) // One cart can has many CartItems, cascade =
+																// CascadeType.ALL means if a User deletes their entire
+																// Cart, MySQL will automatically delete all the
+																// CartItems inside it too
 	private List<CartItem> cartItems;
 
 	public Long getId() {

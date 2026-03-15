@@ -10,17 +10,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailService {
 
-	private static final Logger logger = LoggerFactory.getLogger(EmailService.class);
-	private final JavaMailSender mailSender;
+	private static final Logger logger = LoggerFactory.getLogger(EmailService.class); // used to print logs
+	private final JavaMailSender mailSender; // built-in Spring Boot tool that connects to Gmail using the password we
+												// provided in application.propertie
 
 	@Autowired
 	public EmailService(JavaMailSender mailSender) {
 		this.mailSender = mailSender;
 	}
 
-	public void sendOrderConfirmation(String toEmail, Long orderId, String totalAmount) {
+	public void sendOrderConfirmation(String toEmail, Long orderId, String totalAmount) { // used to send order
+																							// confirmation email
 		try {
-			SimpleMailMessage message = new SimpleMailMessage();
+			SimpleMailMessage message = new SimpleMailMessage(); // this creates email object, where we fill email
+																	// details
 			message.setFrom("dashswastideepa@gmail.com");
 			message.setTo(toEmail);
 			message.setSubject("Order Confirmation - Order #" + orderId);
@@ -28,7 +31,7 @@ public class EmailService {
 					+ " has been successfully placed.\n" + "Total Amount Paid: Rs " + totalAmount + "\n\n"
 					+ "We will notify you once your items ship!");
 
-			mailSender.send(message);
+			mailSender.send(message); // sends the actual email
 			logger.info("Confirmation email successfully sent to {}", toEmail);
 
 		} catch (Exception e) {
