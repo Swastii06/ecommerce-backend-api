@@ -16,6 +16,28 @@ This is a robust, production-ready E-commerce REST API built with Spring Boot. I
 * **Docker & Docker Compose** (Containerization)
 
 
+### Steps to Run
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/Swastii06/ecommerce-backend-api.git](https://github.com/Swastii06/ecommerce-backend-api.git)
+   cd ecommerce-backend-api
+   ```
+
+2. **Start the MySQL Database using Docker:**
+   ```bash
+   docker-compose up -d mysqldb
+   ```
+
+3. **Build and Run the Application:**
+   ```bash
+   mvn clean install
+   mvn spring-boot:run
+   ```
+
+4. **Access the API:**
+   The server will start on `http://localhost:8080`.
+
 
 ## Entity Relationship (ER) Diagram
 *The database architecture representing how entities are related.*
