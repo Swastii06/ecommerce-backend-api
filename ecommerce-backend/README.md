@@ -48,8 +48,8 @@ erDiagram
     USER ||--|| CART : owns
     CART ||--o{ CART_ITEM : contains
     ORDER ||--o{ ORDER_ITEM : includes
-    PRODUCT ||--o{ CART_ITEM : "added as"
-    PRODUCT ||--o{ ORDER_ITEM : "bought as"
+    PRODUCT ||--o{ CART_ITEM : "added_to"
+    PRODUCT ||--o{ ORDER_ITEM : "purchased_as"
 
     USER {
         Long id PK
@@ -58,24 +58,46 @@ erDiagram
         String password
         String role
     }
+
     PRODUCT {
         Long id PK
         String name
+        String description
         BigDecimal price
-        int stock
+        Integer stock
         String category
+        String imageUrl
+        Double rating
     }
+
     CART {
         Long id PK
-        BigDecimal totalPrice
         Long user_id FK
+        BigDecimal totalPrice
     }
+
+    CART_ITEM {
+        Long id PK
+        Long cart_id FK
+        Long product_id FK
+        Integer quantity
+    }
+
     ORDER {
         Long id PK
+        Long user_id FK
         BigDecimal totalAmount
+        LocalDateTime orderDate
         String paymentStatus
         String orderStatus
-        Long user_id FK
+    }
+
+    ORDER_ITEM {
+        Long id PK
+        Long order_id FK
+        Long product_id FK
+        Integer quantity
+        BigDecimal price
     }
 
  ```
