@@ -131,32 +131,32 @@ erDiagram
 **Screenshot 8: Get Product by ID**
 ![Get Product by ID](https://github.com/user-attachments/assets/58fa0f47-3099-49df-af63-52d0649887f4)
 
-Screenshot 9: Update Product (Admin)
+**Screenshot 9: Update Product (Admin)**
 ![Update Product](https://github.com/user-attachments/assets/3fc801c7-987d-4c4c-ab26-d26093b939be)
 
-Screenshot 10: Delete Product (Admin)
+**Screenshot 10: Delete Product (Admin)**
 ![Delete Product](https://github.com/user-attachments/assets/417ce130-2233-46f6-a7d4-f7eec2cd5c0d)
 
-Screenshot 11: View Cart (Customer)
+**Screenshot 11: View Cart (Customer)**
 ![View Cart](https://github.com/user-attachments/assets/1c07a0f6-889d-4d30-9732-0f837739f6d3)
 
-Screenshot 12: Update Cart Quantity (Customer)
+**Screenshot 12: Update Cart Quantity (Customer)**
 ![Update Cart Quantity](https://github.com/user-attachments/assets/b672bec7-03d9-4fc0-8479-a88988ab2f1e)
 
-Screenshot 13: Remove Item From Cart (Customer)
+**Screenshot 13: Remove Item From Cart (Customer)**
 ![Remove Item From Cart](https://github.com/user-attachments/assets/91690d5e-e718-48f7-9e54-415dfdc8f327)
 
-Screenshot 14: Update User (Admin)
+**Screenshot 14: Update User (Admin)**
 ![Update User](https://github.com/user-attachments/assets/6390bfd9-1b88-4f3d-ae0c-0f4032f02979)
 
-Screenshot 15: Delete User (Admin)
+**Screenshot 15: Delete User (Admin)**
 ![Delete User](https://github.com/user-attachments/assets/628b984b-467c-4843-a0bb-d464f31f6b7e)
 
-Screenshot 16: View Order History (Customer)
+**Screenshot 16: View Order History (Customer)**
 ![View Order History](https://github.com/user-attachments/assets/e26c5944-d51f-4ecc-a75f-c7dc0fbaf80c)
 
-Screenshot 17: View Order by ID (Customer)
+**Screenshot 17: View Order by ID (Customer)**
 ![View Order by ID](https://github.com/user-attachments/assets/e7d6230b-ac27-491f-a1db-b50fc1d3c77d)
 
-Screenshot 18: Update Order Status (Admin)
+**Screenshot 18: Update Order Status (Admin)**
 ![Update Order Status](https://github.com/user-attachments/assets/efd3814b-6f98-4778-a8ea-be27a555e360)
