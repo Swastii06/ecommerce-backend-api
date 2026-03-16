@@ -57,7 +57,7 @@ public class SecurityConfig {
 
 		http.csrf(csrf -> csrf.disable()).authorizeHttpRequests(auth -> auth
 
-				// PUBLIC ENDPOINTS (No token required)
+				// PUBLIC ENDPOINTS
 				.requestMatchers("/api/users/register", "/api/users/login", "/error", "/v3/api-docs/**",
 						"/swagger-ui/**", "/swagger-ui.html")
 				.permitAll()
@@ -66,15 +66,16 @@ public class SecurityConfig {
 				.permitAll()
 
 				// ADMIN-ONLY ENDPOINTS (Requires "ADMIN" authority)
-				.requestMatchers(org.springframework.http.HttpMethod.GET, "/api/users/**").hasAuthority("ADMIN")
-				.requestMatchers(org.springframework.http.HttpMethod.PUT, "/api/users/{id}").hasAuthority("ADMIN")
-				.requestMatchers(org.springframework.http.HttpMethod.DELETE, "/api/users/**").hasAuthority("ADMIN")
-
-				.requestMatchers(org.springframework.http.HttpMethod.POST, "/api/products").hasAuthority("ADMIN")
-				.requestMatchers(org.springframework.http.HttpMethod.PUT, "/api/products/**").hasAuthority("ADMIN")
-				.requestMatchers(org.springframework.http.HttpMethod.DELETE, "/api/products/**").hasAuthority("ADMIN")
-
-				.requestMatchers(org.springframework.http.HttpMethod.PUT, "/api/orders/*/status").hasAuthority("ADMIN")
+				.requestMatchers(org.springframework.http.HttpMethod.GET, "/api/users/**")
+				.hasAnyAuthority("ADMIN", "ROLE_ADMIN")
+				.requestMatchers(org.springframework.http.HttpMethod.PUT, "/api/users/**")
+				.hasAnyAuthority("ADMIN", "ROLE_ADMIN")
+				.requestMatchers(org.springframework.http.HttpMethod.POST, "/api/products/**")
+				.hasAnyAuthority("ADMIN", "ROLE_ADMIN")
+				.requestMatchers(org.springframework.http.HttpMethod.PUT, "/api/products/**")
+				.hasAnyAuthority("ADMIN", "ROLE_ADMIN")
+				.requestMatchers(org.springframework.http.HttpMethod.DELETE, "/api/products/**")
+				.hasAnyAuthority("ADMIN", "ROLE_ADMIN")
 
 				// SECURED CUSTOMER ENDPOINTS (Cart, Checkout, Profile)
 				.anyRequest().authenticated())

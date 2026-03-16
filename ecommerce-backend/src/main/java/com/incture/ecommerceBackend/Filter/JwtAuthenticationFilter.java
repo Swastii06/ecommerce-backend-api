@@ -1,10 +1,12 @@
 package com.incture.ecommerceBackend.Filter;
 
 import java.io.IOException;
+import java.util.Collections;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -35,63 +37,53 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-			throws ServletException, IOException { // This method runs for every incoming HTTP request, it decides
-													// whether to generate a token or validate an existing token
+			throws ServletException, IOException {
 
-		// If login request: Generate the Token
+		// Handle Login
 		if (request.getServletPath().equals("/api/users/login")) {
-			ObjectMapper objectMapper = new ObjectMapper(); // converts JSON request body into Java object
+			ObjectMapper objectMapper = new ObjectMapper();
 			LoginRequest loginRequest = objectMapper.readValue(request.getInputStream(), LoginRequest.class);
-			// Reads the request body and converts it into LoginRequest object which
-			// contains email and password.
 
 			UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-					loginRequest.getEmail(), loginRequest.getPassword()); // Creates an authentication token using email
-																			// and password which verifies the
-																			// credentials using UserDetailsService
+					loginRequest.getEmail(), loginRequest.getPassword());
+
 			Authentication authResult = authenticationManager.authenticate(authToken);
 
-			if (authResult.isAuthenticated()) { // If authentication succeeds, generate a JWT token
+			if (authResult.isAuthenticated()) {
+				// Get role from authorities (e.g., ADMIN or USER)
+				String role = authResult.getAuthorities().stream().map(r -> r.getAuthority()).findFirst()
+						.orElse("USER");
 
-				String token = jwtUtil.generateToken(authResult.getName(), 60); // Generates a JWT token containing the
-																				// username & token expiry is set to 60
-																				// minutes
-				response.setHeader("Authorization", "Bearer " + token); // Sends the generated JWT token back in the
-																		// response header
+				String token = jwtUtil.generateToken(authResult.getName(), role);
+
+				response.setHeader("Authorization", "Bearer " + token);
 				response.getWriter().write("Login Successful! Token in header.");
 			}
-			return; // Stops further processing since login is already handled
+			return;
 		}
 
-		// For all other tokens: Read and Validate the Token
-		String authHeader = request.getHeader("Authorization"); // Reads the Authorization header from the request
+		// Handle Token Validation
+		String authHeader = request.getHeader("Authorization");
 
-		if (authHeader != null && authHeader.startsWith("Bearer ")) { // Checks whether the Authorization header
-																		// contains a Bearer token
-			String token = authHeader.substring(7); // Remove "Bearer " prefix
+		if (authHeader != null && authHeader.startsWith("Bearer ")) {
+			String token = authHeader.substring(7);
 
-			if (jwtUtil.validateToken(token)) { // Validates the token using JwtUtil, Checks token signature, format,
-												// and expiry.
+			if (jwtUtil.validateToken(token)) {
 				String email = jwtUtil.extractUsername(token);
-				UserDetails userDetails = userDetailsService.loadUserByUsername(email); // Loads the user details from
-																						// the database using the
-																						// extracted email
+
+				// Extract the role claim specifically
+				String role = jwtUtil.extractClaim(token, claims -> claims.get("role", String.class));
+
+				UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
 				UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails,
-						null, userDetails.getAuthorities()); // Creates an authenticated token containing user details
-																// and roles
-				authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+						null, Collections.singletonList(new SimpleGrantedAuthority(role)));
 
-				SecurityContextHolder.getContext().setAuthentication(authToken); // Stores the authentication
-																					// information in Spring Security
-																					// context (tells Spring that the
-																					// user is authenticated for this
-																					// request)
+				authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+				SecurityContextHolder.getContext().setAuthentication(authToken);
 			}
 		}
 
-		filterChain.doFilter(request, response); // Passes the request to the next filter in the chain, If
-													// authentication is successful, the request proceeds to the
-													// controller.
+		filterChain.doFilter(request, response);
 	}
 }

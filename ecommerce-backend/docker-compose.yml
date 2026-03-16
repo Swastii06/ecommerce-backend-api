@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  mysqldb:       #you dont need to install MySQL on your computer, creates a container named ecommerce_db, and automatically sets the root password to root
+  mysqldb:
     image: mysql:8.0
     container_name: ecommerce_db
     environment:
@@ -18,3 +18,5 @@ services:
       - mysqldb
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/ecommerce_db?allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root

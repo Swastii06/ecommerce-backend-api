@@ -27,8 +27,8 @@ class JwtUtilTest {
 	@DisplayName("Test Generate Token")
 	@Test
 	void testGenerateToken() {
-		// Adding 3600000 (1 hour) as the second argument
-		String token = jwtUtil.generateToken(userDetails.getUsername(), 3600000L);
+		// FIX: Changed 3600000L to "ADMIN" to match the new method signature (String, String)
+		String token = jwtUtil.generateToken(userDetails.getUsername(), "ADMIN");
 		assertNotNull(token);
 		assertTrue(token.length() > 0);
 	}
@@ -36,8 +36,8 @@ class JwtUtilTest {
 	@DisplayName("Test Extract Username from Token")
 	@Test
 	void testExtractUsername() {
-		// Adding the expiration time here too
-		String token = jwtUtil.generateToken("swasti@example.com", 3600000L);
+		// FIX: Changed 3600000L to "USER"
+		String token = jwtUtil.generateToken("swasti@example.com", "USER");
 		String extractedUsername = jwtUtil.extractUsername(token);
 		assertEquals("swasti@example.com", extractedUsername);
 	}
@@ -45,12 +45,10 @@ class JwtUtilTest {
 	@DisplayName("Test Token Validation - Success")
 	@Test
 	void testValidateToken_Success() {
-		// Generate the token
-		String token = jwtUtil.generateToken(userDetails.getUsername(), 3600000L);
+		// FIX: Changed 3600000L to "ADMIN"
+		String token = jwtUtil.generateToken(userDetails.getUsername(), "ADMIN");
 
-		// Remove userDetails from the call to match your method signature
 		Boolean isValid = jwtUtil.validateToken(token);
-
 		assertTrue(isValid);
 	}
 }
