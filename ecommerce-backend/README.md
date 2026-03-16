@@ -77,7 +77,8 @@ erDiagram
         String orderStatus
         Long user_id FK
     }
-    ```
+
+ ```
 
 ## API Endpoints & Methods
 
@@ -121,13 +122,13 @@ erDiagram
 **Screenshot 5: Order Checkout (200 OK)**
 ![Checkout](https://github.com/user-attachments/assets/898cef3e-015f-4f25-a277-9a93ad788506)
 
-Screenshot 6: Get User by ID (Admin)
+**Screenshot 6: Get User by ID (Admin)**
 ![Get User by ID](https://github.com/user-attachments/assets/46e44932-a291-46fb-a39e-62a4b92fa0f9)
 
-Screenshot 7: Get All Products
+**Screenshot 7: Get All Products**
 ![Get All Products](https://github.com/user-attachments/assets/2d8f5e1b-d033-46fe-8f8b-86f7571d2718)
 
-Screenshot 8: Get Product by ID
+**Screenshot 8: Get Product by ID**
 ![Get Product by ID](https://github.com/user-attachments/assets/58fa0f47-3099-49df-af63-52d0649887f4)
 
 Screenshot 9: Update Product (Admin)
