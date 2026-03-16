@@ -105,28 +105,29 @@ erDiagram
 ## API Endpoints & Methods
 
 | Method | Endpoint | Description | Security |
-|--------|----------|-------------|----------|
-| **Users** | | | |
+|:-------|:---------|:------------|:---------|
+| **User APIs** | | | |
 | `POST` | `/api/users/register` | Register a new user account | Public |
 | `POST` | `/api/users/login` | Authenticate and generate JWT token | Public |
-| `PUT` | `/api/users/profile` | Update logged-in user profile | Secured (JWT) |
-| `PUT` | `/api/users/change-password` | Change password for logged-in user | Secured (JWT) |
 | `GET` | `/api/users/{id}` | Retrieve a user by ID | Secured (Admin) |
 | `PUT` | `/api/users/{id}` | Update a user by ID | Secured (Admin) |
-| `DELETE`| `/api/users/{id}` | Delete a user by ID | Secured (Admin) |
-| **Products** | | | |
+| `DELETE`| `/api/users/{id}` | Delete a user by ID | Secured (Admin Only) |
+| **Product APIs** | | | |
 | `POST` | `/api/products` | Add a new product to the catalog | Secured (Admin) |
-| `GET`  | `/api/products` | Retrieve all products (Supports Pagination & Filters) | Public |
+| `GET` | `/api/products` | Retrieve all products | Public |
+| `GET` | `/api/products/{id}` | Retrieve a specific product by ID | Public |
 | `PUT` | `/api/products/{id}` | Update an existing product | Secured (Admin) |
 | `DELETE`| `/api/products/{id}` | Delete a product from the catalog | Secured (Admin) |
-| **Cart** | | | |
+| **Cart APIs** | | | |
+| `POST` | `/api/cart/add/{productId}` | Add product to shopping cart | Secured (JWT) |
+| `PUT` | `/api/cart/update/{productId}`| Update item quantity in cart | Secured (JWT) |
+| `DELETE`| `/api/cart/remove/{productId}` | Remove an item from the cart | Secured (JWT) |
 | `GET` | `/api/cart` | View the current user's active cart | Secured (JWT) |
-| `POST` | `/api/cart/add/{productId}?quantity={qty}` | Add product to active shopping cart | Secured (JWT) |
-| `PUT` | `/api/cart/update/{productId}?quantity={qty}`| Update item quantity in cart | Secured (JWT) |
-| `DELETE`| `/api/cart/remove/{productId}` | Remove an item entirely from the cart | Secured (JWT) |
-| **Orders** | | | |
+| **Order APIs** | | | |
 | `POST` | `/api/orders/checkout` | Process payment and place order | Secured (JWT) |
-
+| `GET` | `/api/orders` | View logged-in user's order history | Secured (JWT) |
+| `GET` | `/api/orders/{id}` | View a specific order by ID | Secured (JWT) |
+| `PUT` | `/api/orders/{id}/status` | Update order status (Shipped, Delivered) | Secured (Admin) |
 ## API Screenshots
 
 **Screenshot 1: User Registration**
